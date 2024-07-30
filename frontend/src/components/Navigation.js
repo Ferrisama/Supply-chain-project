@@ -9,6 +9,9 @@ const Navigation = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Supply Chain Management
         </Typography>
+        <Button color="inherit" component={Link} to="/dashboard">
+          Dashboard
+        </Button>
         <Button color="inherit" component={Link} to="/products">
           Products
         </Button>

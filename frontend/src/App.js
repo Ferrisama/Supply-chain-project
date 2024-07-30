@@ -8,6 +8,7 @@ import Register from "./components/Register";
 import ProductList from "./components/ProductList";
 import OrderList from "./components/OrderList";
 import Blockchain from "./components/Blockchain";
+import Dashboard from "./components/Dashboard";
 
 const theme = createTheme();
 
@@ -24,7 +25,8 @@ function App() {
             <Route path="/products" element={<ProductList />} />
             <Route path="/orders" element={<OrderList />} />
             <Route path="/blockchain" element={<Blockchain />} />
-            <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
           </Routes>
         </div>
       </Router>
