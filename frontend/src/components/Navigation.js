@@ -21,6 +21,9 @@ const Navigation = () => {
         <Button color="inherit" component={Link} to="/blockchain">
           Blockchain
         </Button>
+        <Button color="inherit" component={Link} to="/product-analytics">
+          Product Analytics
+        </Button>
         <Button color="inherit" component={Link} to="/login">
           Login
         </Button>

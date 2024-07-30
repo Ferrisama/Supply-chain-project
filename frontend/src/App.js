@@ -9,6 +9,7 @@ import ProductList from "./components/ProductList";
 import OrderList from "./components/OrderList";
 import Blockchain from "./components/Blockchain";
 import Dashboard from "./components/Dashboard";
+import ProductAnalytics from "./components/ProductAnalytics";
 
 const theme = createTheme();
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/orders" element={<OrderList />} />
             <Route path="/blockchain" element={<Blockchain />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/product-analytics" element={<ProductAnalytics />} />
             <Route path="/" element={<Dashboard />} />
           </Routes>
         </div>
