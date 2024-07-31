@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import axiosInstance from "../utils/axiosConfig";
 import {
   Container,
   Typography,
@@ -44,9 +45,9 @@ const Dashboard = () => {
       try {
         const [productsResponse, ordersResponse, blockchainResponse] =
           await Promise.all([
-            axios.get("http://localhost:5001/api/products"),
-            axios.get("http://localhost:5001/api/orders"),
-            axios.get("http://localhost:5001/api/blockchain"),
+            axiosInstance.get("/products"),
+            axiosInstance.get("/orders"),
+            axiosInstance.get("/blockchain"),
           ]);
 
         const totalProducts = productsResponse.data.length;
@@ -65,7 +66,6 @@ const Dashboard = () => {
           orders: ordersResponse.data,
           productCategories,
         });
-        setBlockchainData(blockchainResponse.data);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
         setError(error.message);

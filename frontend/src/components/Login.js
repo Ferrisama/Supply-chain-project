@@ -2,25 +2,44 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
+import { useAuth } from "../AuthContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     try {
+      console.log("Attempting login for:", username);
       const response = await axios.post(
         "http://localhost:5001/api/auth/login",
         { username, password }
       );
-      localStorage.setItem("token", response.data.token);
-      navigate("/products");
+      console.log("Login response:", response.data);
+      login(response.data.token, response.data.role);
+      navigate("/dashboard");
     } catch (error) {
-      console.error("Login failed", error);
+      console.error("Login error:", error);
+      if (error.response) {
+        console.error("Error response:", error.response.data);
+        setError(
+          error.response.data.message || "An error occurred during login"
+        );
+      } else if (error.request) {
+        console.error("Error request:", error.request);
+        setError("No response received from server");
+      } else {
+        console.error("Error message:", error.message);
+        setError("An error occurred during login");
+      }
     }
   };
+
   return (
     <Container maxWidth="xs">
       <Box
@@ -67,6 +86,7 @@ const Login = () => {
           >
             Sign In
           </Button>
+          {error && <Typography color="error">{error}</Typography>}
         </Box>
       </Box>
     </Container>

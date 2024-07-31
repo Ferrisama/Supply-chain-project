@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 const auth = require("../middleware/auth");
+const roleAuth = require("../middleware/roleAuth");
 
-// Get all products
-router.get("/", async (req, res) => {
+// Get all products (accessible to all authenticated users)
+router.get("/", auth, async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM products");
     res.json(result.rows);
@@ -14,8 +15,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Add a new product
-router.post("/", auth, async (req, res) => {
+// Add a new product (accessible only to admin and manager roles)
+router.post("/", auth, roleAuth(["admin", "manager"]), async (req, res) => {
   const { name, description, sku } = req.body;
   try {
     const result = await db.query(
