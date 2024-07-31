@@ -31,3 +31,4 @@ router.post("/", auth, roleAuth(["admin", "manager"]), async (req, res) => {
 });
 
 module.exports = router;
+
